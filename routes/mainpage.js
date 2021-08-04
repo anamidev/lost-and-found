@@ -8,8 +8,7 @@ router.get('/', (req, res) => {
   // const allPosts = db.Post.findAll({
   // include: db.User
   // })
-  // вместо res.send вставить res.render('mainpage')
-  res.send('Main page');
+  res.render('mainpage');
 });
 
 module.exports = router;

@@ -6,7 +6,7 @@ const router = express.Router();
 router.get('/', (req, res) => {
   // страница для логина
   // вместо res.send вставить res.render('login')
-  res.send('Login page');
+  res.render('login');
 });
 
 router.post('/', (req, res) => {
