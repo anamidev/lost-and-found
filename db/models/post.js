@@ -1,13 +1,12 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Post extends Model {
     static associate(models) {
-      // define association here
+      Post.belongsTo(models.Category, { foreignKey: 'userId' });
+      Post.belongsTo(models.User, { foreignKey: 'categoryId' });
     }
-  };
+  }
   Post.init({
     title: {
       allowNull: false,
@@ -17,27 +16,17 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.TEXT,
     },
-    userID: {
+    photo: {
       allowNull: false,
-      type: DataTypes.INTEGER,
-      references: {
-        model: {
-          tableName: 'Users',
-        },
-        key: 'id',
-      },
-      onUpdate: 'CASCADE',
+      type: DataTypes.TEXT,
     },
-    categoryID: {
+    userId: {
       allowNull: false,
       type: DataTypes.INTEGER,
-      references: {
-        model: {
-          tableName: 'Categories',
-        },
-        key: 'id',
-      },
-      onUpdate: 'CASCADE',
+    },
+    categoryId: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
     },
   }, {
     sequelize,
