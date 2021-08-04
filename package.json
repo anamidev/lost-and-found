@@ -1,0 +1,39 @@
+{
+  "name": "lost-and-found",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js --ignore sessions"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lil-m00ha/lost-and-found.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lil-m00ha/lost-and-found/issues"
+  },
+  "homepage": "https://github.com/lil-m00ha/lost-and-found#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "hbs": "^4.1.2",
+    "pg": "^8.7.1",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.6.5",
+    "session-file-store": "^1.5.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.4",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.12",
+    "sequelize-cli": "^6.2.0"
+  }
+}
