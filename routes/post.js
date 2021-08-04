@@ -8,6 +8,10 @@ router.get('/new', (req, res) => {
   res.render('postnew');
 });
 
+router.post('/new', (req, res) => {
+  // добавление поста в базу и переход на страницу этого поста
+});
+
 router.get('/:id', async (req, res) => {
   // отрисовка страницы поста с информацией о создателе и пользователях,
   // которые сделали claim
@@ -34,6 +38,7 @@ router.get('/:id', async (req, res) => {
   // }
 });
 
+// ручка для клейма в посте
 // router.post('/:id', async (req, res) => {
 //   const { id } = req.params;
   // const claimedPost = await db.Claim.findOne({
