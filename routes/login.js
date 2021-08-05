@@ -1,4 +1,3 @@
-const e = require('express');
 const express = require('express');
 const { User } = require('../db/models');
 
@@ -22,8 +21,8 @@ router.post('/', async (req, res) => {
       req.session.userName = user.name;
       req.session.userEmail = user.email;
       // Задать redirect на профиль
-      res.redirect('/login');
       // res.status(200).render(`/profile/${user.id}`);
+      res.redirect(`/profile/${user.id}`);
     } else {
       // Password не совпал, надо что-то сообщить пользователю
       return res.render('login', { warningPassword: 'Неверный пароль', saveEmail: email.toLowerCase() });

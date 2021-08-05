@@ -1,9 +1,10 @@
 const express = require('express');
 const db = require('../db/models/index');
+const { sessionChecker } = require('../middleware/commonMiddleware');
 
 const router = express.Router();
 
-router.get('/new', (req, res) => {
+router.get('/new', sessionChecker, (req, res) => {
   // отправка html с формой клиенту для отрисовки со стороны фронта через fetch
   res.render('postnew');
 });

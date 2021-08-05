@@ -1,18 +1,16 @@
-const sessionLogger = (req, res, next) => {
-  next();
-};
-
 const sessionChecker = (req, res, next) => {
-  if (req.session.email) {
+  if (req.session.userEmail) {
     next();
   } else {
-    res.redirect('/users/authorized');
+    res.redirect('/registration');
   }
 };
 
 const layoutChanger = (req, res, next) => {
-  res.locals.userName = req.session?.email;
+  if (req.session) {
+    res.locals.userName = req.session.userName;
+  }
   next();
 };
 
-module.exports = { sessionLogger, sessionChecker, layoutChanger };
+module.exports = { sessionChecker, layoutChanger };
