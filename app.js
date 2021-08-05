@@ -55,7 +55,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   name: 'session',
-  cookie: { secure: false, httpOnly: false },
+  cookie: { secure: false, httpOnly: true },
   store: new FileStore({}),
 }));
 

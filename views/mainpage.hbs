@@ -1,13 +1,11 @@
 <h3>Главная страница и все посты через each</h3>
 <div id="container">
   {{#each everyPost}}
-  <div>
+  <div id="{{this.id}}">
     <hr>
-    <p>{{this.id}}</p>
-    <p>{{this.photo}}</p>//ссылка
-    <p>{{this.title}}</p>
+    <img src=".{{this.photo}}" alt="Без изображения">
+    <a href="/post/{{this.id}}"><p>{{this.title}}</p></a>
     <p>{{this.description}}</p>
-    
   </div>
   {{/each}}
 </div>

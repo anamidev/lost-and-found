@@ -1,11 +1,37 @@
-
-//сраница конкретног поста 
-
-<div>
+<div class="post" id="{{post.id}}">
+  <div>Кто нашел - {{post.User.name}}</div>
+  <img src=".{{post.photo}}" alt="без картинки">
   <div>{{post.title}}</div>
-  <div>{{post.text}}</div>
-  <div>{{post.owner}}</div>
-  {{#each claimer}}
-  <div>{{this.name}}</div>
-  {{/each}}
+  <div>{{post.description}}</div>
+  {{#if userName}}
+
+    <form name="claimForm" action="/post/{{post.id}}" method="POST">
+      {{#if alreadyClaimed}}
+      <input disabled type="text" name="text" placeholder="Ваше сообщение к заявлению">
+      <button disabled>CLAIM</button>
+      {{else}}
+      <input type="text" name="text" placeholder="Ваше сообщение к заявлению">
+      <button>CLAIM</button>
+      {{/if}}
+    </form>
+
+
+  {{/if}}
+
+  {{#if alreadyClaimed}}
+  вы уже сделали запрос на этом посту!
+  {{/if}}
+
+  {{#if claimFail}}
+  не удалось сделать запрос
+  {{/if}}
+
+  <div class="claim-messages">
+    {{#each claimMess}}
+    <div>Ответил(а) - {{this.Message.User.name}}</div>
+    <div>{{this.Message.text}}</div>
+    {{/each}}
+  </div>
+
 </div>
+
