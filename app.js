@@ -4,6 +4,7 @@ const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const cookieParser = require('cookie-parser');
 const hbs = require('hbs');
+const { layoutChanger } = require('./middleware/commonMiddleware');
 
 // логгер для чтения команд на сервере и путь
 const morganLogger = require('morgan');
@@ -42,6 +43,8 @@ app.use(session({
   cookie: { secure: false, httpOnly: true },
   store: new FileStore({}),
 }));
+
+app.use(layoutChanger);
 
 // использование роутеров под определенные адреса
 app.use('/', mainPageRouter);

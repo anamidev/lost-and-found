@@ -1,5 +1,6 @@
 const express = require('express');
 const db = require('../db/models/index');
+const { sessionChecker } = require('../middleware/commonMiddleware');
 
 const router = express.Router();
 
