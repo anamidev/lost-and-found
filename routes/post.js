@@ -58,7 +58,7 @@ router.get('/:id', async (req, res) => {
     const userClaim = await db.Claim.findOne({ where: { userId: req.session.userId, postId: id }});
     if (userClaim) res.render('post', { post, alreadyClaimed: true, claimMess });
     else res.render('post', { post, claimMess });
-  }
+  } else res.render('post', { post, claimMess });
   // проверка наличия сессии, через middleware
   // если сессия есть, то отображать кнопку claim
   // проверка, если текущий пользователь сделал claim на посту или нет
