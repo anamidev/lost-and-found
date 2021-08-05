@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "lost_and_found_user",
-    "password": "lost_and_found_user",
-    "database": "lost_and_found",
+    "username": "artem",
+    "password": null,
+    "database": "itemlost",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },

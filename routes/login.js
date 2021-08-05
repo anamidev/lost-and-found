@@ -1,5 +1,6 @@
+const e = require('express');
 const express = require('express');
-const db = require('../db/models/index');
+const { User } = require('../db/models');
 
 const router = express.Router();
 
@@ -9,21 +10,27 @@ router.get('/', (req, res) => {
   res.render('login');
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const { email, password } = req.body;
-  // проверка наличия такого пользователя - в данном случае email'а в базе
-  const user = db.User.findOne({
-    where: { email },
-  });
-  // проверка совпадения введенного пароля с текущим паролем пользователя
-  // если совпадает, заводим сессию и записываем информацию о пользователе
-  if (user.password === password) {
-    res.session.userId = user.id;
-    res.session.userName = user.name;
-    res.session.userEmail = user.email;
-    res.status(200).render(`/profile/${user.id}`);
+  // Проверка наличия пользователя в БД по email
+  const user = await User.findOne({ where: { email: email.toLowerCase() } });
+  // Если найден user, продолжаем проверку
+  if (user) {
+  // Если пароль совпал, создаём сессию, записываем информацию о пользователе, редиректим на профиль
+    if (user.password === password) {
+      req.session.userId = user.id;
+      req.session.userName = user.name;
+      req.session.userEmail = user.email;
+      // Задать redirect на профиль
+      res.redirect('/login');
+      // res.status(200).render(`/profile/${user.id}`);
+    } else {
+      // Password не совпал, надо что-то сообщить пользователю
+      return res.render('login', { warningPassword: 'Неверный пароль', saveEmail: email.toLowerCase() });
+    }
   } else {
-    res.status().send();
+    // Email не найден, надо что-то сообщить пользователю
+    return res.render('login', { warningEmail: 'Такого email не существует' });
   }
 });
 
