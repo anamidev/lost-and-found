@@ -2,14 +2,14 @@
 
 <div id="container">
   {{#each everyPost}}
-  <div>
+  <div id="{{this.id}}"></div>
     <hr>
-    <p>{{this.id}}</p>
-    <p>{{this.title}}</p>
+    <img src=".{{this.photo}}" alt="Без изображения">
+    <a href="/post/{{this.id}}"><p>{{this.title}}</p></a>
     <p>{{this.description}}</p>
-    <p>{{this.photo}}</p>
     <a href="/profile/{{this.id}}/delete"> <button>удалить пост</button></a>
     
   </div>
+
   {{/each}}
 </div>
