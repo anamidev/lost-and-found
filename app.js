@@ -1,96 +1,69 @@
-const express = require("express"); //подключаем экспресс
-const morgan = require("morgan"); // логирует htttp статус поступают ли какие нить запросы
-const path = require("path");//подключаем паф
-const hbs = require("hbs");//подключаем хбс
-const { Console } = require("console");
-const PORT = 3000;
+// основные пакеты для работы приложения
+const express = require('express');
+const session = require('express-session');
+const FileStore = require('session-file-store')(session);
+const cookieParser = require('cookie-parser');
+const hbs = require('hbs');
+const multer = require("multer"); //мултер
+
+// логгер для чтения команд на сервере и путь
+const morganLogger = require('morgan');
+const path = require('path');
+
+// импорт роутеров
+const mainPageRouter = require('./routes/mainpage');
+const registrationRouter = require('./routes/registration');
+const loginRouter = require('./routes/login');
+const logoutRouter = require('./routes/logout');
+const profileRouter = require('./routes/profile');
+const postRouter = require('./routes/post');
+
+// объявление приложения и указание порта
 const app = express();
+const PORT = 3000;
 
 
+const storageConfig = multer.diskStorage({ //мултер
+  destination: (req, file, cb) => {
+    cb(null, "./public/uploads");
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
 
 
-app.set("view engine", "hbs"); //подключаем движ
-app.set("views", path.join(process.env.PWD, "views"));
-hbs.registerPartials(path.join(process.env.PWD, "views", "partials"));
-app.use(morgan("dev"));
+// подключение движка отображения
+app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'views'));
+hbs.registerPartials(path.join(__dirname, 'views', 'partials'));
+
+// мидлвер
+// логгер, статик для файлов, декодинг тела формы, декодинг джсона, парсер куков,
+// подключение сессии с использованием хранилища файлов сессий
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(process.env.PWD, "public")));
+app.use(morganLogger('dev'));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(multer({ storage: storageConfig }).single("photo"));//мидлвара мултер
+app.use(express.json());
+app.use(cookieParser());
+app.use(session({
+  secret: 'alOjV68Hbs3zpL016FbsuGd5',
+  resave: false,
+  saveUninitialized: false,
+  name: 'session',
+  cookie: { secure: false, httpOnly: true },
+  store: new FileStore({}),
+}));
 
-
-
-//ручка главная страница
-app.get("/", (req, res) => {
-  res.render("index");
-});
-
-
-//ручка на страницу регистрации
-app.get("/signup", (req, res) => {
-  res.render("signup");
-});
-
-
-
-
-
-
-// ручка на вход
-app.get("/signin", (req, res) => {
-  res.render("signin");
-});
-
-
-
-
-
-
-
-
-
-
-
-// ручка на мои посты 
-
-app.get("/userpost", (req, res) => {
-  res.render("userpost");
-});
-
-
-// ручка на все посты приложения
-
-app.get("", (req, res) => {
-  res.render("");
-});
-
-
-// ручка на добавить пост 
-
-app.get("/addpost", (req, res) => {
-  res.render("addpost");
-});
-
-
-
-
-
-
-
-
-//ручка на добавление выхода
-
-app.get("/logout", (req, res) => {
-  res.render("index");
-});
-
-
-
-
-
- 
-
-
-
+// использование роутеров под определенные адреса
+app.use('/', mainPageRouter);
+app.use('/registration', registrationRouter);
+app.use('/login', loginRouter);
+app.use('/logout', logoutRouter);
+app.use('/profile', profileRouter);
+app.use('/post', postRouter);
 
 app.listen(PORT, () => {
-console.log("Порт запущен на порту PORT");
+  console.log('Server is up!');
 });
