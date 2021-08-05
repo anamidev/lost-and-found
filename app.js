@@ -29,7 +29,7 @@ hbs.registerPartials(path.join(__dirname, 'views', 'partials'));
 // мидлвер
 // логгер, статик для файлов, декодинг тела формы, декодинг джсона, парсер куков,
 // подключение сессии с использованием хранилища файлов сессий
-// app.use(morganLogger('dev'));
+app.use(morganLogger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

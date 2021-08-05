@@ -1,0 +1,9 @@
+<div>
+  <div>{{user.name}}</div>
+  <div>{{user.email}}</div>
+  <div>
+    {{#each userPosts}}
+    {{> postshort}}
+    {{/each}}
+  </div>
+</div>

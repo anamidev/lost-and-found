@@ -4,12 +4,11 @@ const db = require('../db/models/index');
 const router = express.Router();
 
 router.get('/new', (req, res) => {
-  // отправка html с формой клиенту для отрисовки со стороны фронта через fetch
   res.render('postnew');
 });
 
 router.post('/new', (req, res) => {
-  // добавление поста в базу и переход на страницу этого поста
+  
 });
 
 router.get('/:id', async (req, res) => {
