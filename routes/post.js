@@ -7,8 +7,29 @@ router.get('/new', (req, res) => {
   res.render('postnew');
 });
 
-router.post('/new', (req, res) => {
-  
+router.post('/new', async (req, res) => {
+  // добавление поста в базу и переход на страницу этого поста
+  const { category, title, description } = req.body;
+  console.log(category, title, description);
+  console.log(req.file);
+  let photo = null;
+  if (req.file) {
+    photo = req.file.path.slice(6);
+  }
+  if (Number(category) === 0) {
+    return res.render('postnew', { categoryCheckFail: true });
+  }
+  if (title === '' || title == null) {
+    return res.render('postnew', { titleCheckFail: true });
+  }
+  await db.Post.create({
+    title,
+    description,
+    categoryId: Number(category),
+    userId: req.session.userId,
+    photo,
+  });
+  res.redirect('/post/new');
 });
 
 router.get('/:id', async (req, res) => {

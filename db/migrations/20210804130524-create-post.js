@@ -13,11 +13,9 @@ module.exports = {
         type: Sequelize.STRING,
       },
       description: {
-        allowNull: false,
         type: Sequelize.TEXT,
       },
       photo: {
-        allowNull: false,
         type: Sequelize.TEXT,
       },
       userId: {
