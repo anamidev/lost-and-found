@@ -1,19 +1,13 @@
 <h3>Главная страница и все посты через each</h3>
-<div>
-  {{#each allPosts}}
-  {{> postshort}}
-  {{/each}}
-</div>
-
-{{!-- <div id="container">
-  {{#each allPosts}}
+<div id="container">
+  {{#each everyPost}}
   <div>
     <hr>
     <p>{{this.id}}</p>
+    <p>{{this.photo}}</p>//ссылка
     <p>{{this.title}}</p>
     <p>{{this.description}}</p>
-    <p>{{this.photo}}</p>
-    <a href=""> <button>Откликнуться</button></a>
+    
   </div>
   {{/each}}
-</div> --}}
+</div>

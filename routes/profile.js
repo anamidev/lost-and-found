@@ -1,19 +1,28 @@
 const express = require('express');
-const db = require('../db/models/index');
+const { Post } = require('../db/models');
 
 const router = express.Router();
 
-router.get('/:id', async (req, res) => {
+router.get('/:id',async (req, res) => {
   // проверка, какой пользователь заходит на страницу профиля
   // сделать проверку через req.session
+  const { id } = req.params
   if (req.session.userId === Number(req.params.id)) {
     // рендерим страницу нужного пользователя
-    const user = await db.User.findOne({ where: { id: req.params.id } });
-    const userPosts = await db.Post.findAll({ where: { userId: user.id } });
-    res.render('profile', { user, userPosts });
+    // вместо res.send сделать res.render
+    const everyPost = await Post.findAll({ where: { userId: id } });
+    res.render('profile', { everyPost });
   } else {
     res.redirect('/');
   }
+});
+
+router.get('/:id/delete', async (req, res) => {
+  const { id } = req.params;
+  // console.log(id);
+  await Post.destroy({ where: { id } });
+  console.log(req.session.userId)
+  res.redirect(`/profile/${req.session.UserId}`);
 });
 
 module.exports = router;

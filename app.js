@@ -23,7 +23,7 @@ const postRouter = require('./routes/post');
 
 // объявление приложения и указание порта
 const app = express();
-const PORT = 3000;
+const PORT = 3001;
 
 const storageConfig = multer.diskStorage({ // мултер
   destination: (req, file, cb) => {
