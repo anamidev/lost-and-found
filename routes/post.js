@@ -1,17 +1,17 @@
 const express = require('express');
 const db = require('../db/models/index');
+const { sessionChecker } = require('../middleware/commonMiddleware');
 
 const router = express.Router();
 
-router.get('/new', (req, res) => {
+router.get('/new', sessionChecker, (req, res) => {
+  // отправка html с формой клиенту для отрисовки со стороны фронта через fetch
   res.render('postnew');
 });
 
 router.post('/new', async (req, res) => {
   // добавление поста в базу и переход на страницу этого поста
   const { category, title, description } = req.body;
-  console.log(category, title, description);
-  console.log(req.file);
   let photo = null;
   if (req.file) {
     photo = req.file.path.slice(6);

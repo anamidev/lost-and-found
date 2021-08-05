@@ -9,6 +9,7 @@ router.get('/', async (req, res) => {
   // include: db.User
   // })
   const everyPost = await Post.findAll();
+  console.log(res.locals.userId, res.locals.userName);
   res.render('mainpage', { everyPost });
 });
 

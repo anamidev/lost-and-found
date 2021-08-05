@@ -1,4 +1,3 @@
-const e = require('express');
 const express = require('express');
 const { User } = require('../db/models');
 
@@ -16,6 +15,7 @@ router.post('/', async (req, res) => {
       req.session.userId = user.id;
       req.session.userName = user.name;
       req.session.userEmail = user.email;
+      // Задать redirect на профиль
       res.redirect(`/profile/${user.id}`);
     } else {
       return res.render('login', { warningPassword: 'Неверный пароль', saveEmail: email.toLowerCase() });
