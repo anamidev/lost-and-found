@@ -34,15 +34,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 //   res.redirect('/');
 // });
 
-app.get('/', (req, res) => {
-  res.render('postCreate');
-});
+// app.get('/', (req, res) => {
+//   res.render('postCreate');
+// });
 
-app.post('/', async (req, res) => {
-  const { title, description, photo } = req.body;
-  const post = await Post.create({ title, description, photo, userId: 1, categoryId: 3 });
-  console.log(req.body);
-  res.redirect('/');
-});
+// app.post('/', async (req, res) => {
+//   const { title, description, photo } = req.body;
+//   const post = await Post.create({ title, description, photo, userId: 1, categoryId: 3 });
+//   console.log(req.body);
+//   res.redirect('/');
+// });
 
 app.listen(80);
