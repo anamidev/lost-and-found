@@ -1,0 +1,8 @@
+<div class="claims">
+  {{#each userClaims}}
+  <div>
+    <a href="/post/{{this.Post.id}}">{{this.Post.title}}</a>
+    <div>{{this.Message.text}}</div>
+  </div>
+  {{/each}}
+</div>
