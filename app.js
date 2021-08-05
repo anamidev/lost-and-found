@@ -9,6 +9,9 @@ const hbs = require('hbs');
 const morganLogger = require('morgan');
 const path = require('path');
 
+// импорт мидлверов
+// const loginChecker = require('./middleware/loginChecker');
+
 // импорт роутеров
 const mainPageRouter = require('./routes/mainpage');
 const registrationRouter = require('./routes/registration');
