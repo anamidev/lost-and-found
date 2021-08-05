@@ -9,10 +9,10 @@ router.get('/', (req, res) => {
   res.render('login');
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const { email, password } = req.body;
   // проверка наличия такого пользователя - в данном случае email'а в базе
-  const user = db.User.findOne({
+  const user = await db.User.findOne({
     where: { email },
   });
   // проверка совпадения введенного пароля с текущим паролем пользователя

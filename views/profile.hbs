@@ -1,0 +1,15 @@
+<h3>Здесь отобразятся все посты юзера</h3>
+
+<div id="container">
+  {{#each everyPost}}
+  <div>
+    <hr>
+    <p>{{this.id}}</p>
+    <p>{{this.title}}</p>
+    <p>{{this.description}}</p>
+    <p>{{this.photo}}</p>
+    <a href="/{{this.id}}/delete"> <button>удалить пост</button></a>
+    
+  </div>
+  {{/each}}
+</div>
