@@ -8,23 +8,35 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  const { name, email, password } = req.body;
-  // сделать проверку email'а
-  // возможно, сделать проверку пароля (условие пароля)
-  // сделать проверку двойного ввода пароля
-  // сделать проверку, если поля пришли пустыми или нет
-  // отправить статус ошибки и вывести сообщение об этом
+  const {
+    name, email, password, passwordRepeat,
+  } = req.body;
+
+  if (name.length > 50 || name.length < 2) {
+    return res.render('registration', { nameCheckFail: true });
+  }
+
+  const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/i;
+  if (email.length > 255 || !emailRegex.test(email)) {
+    return res.render('registration', { emailCheckFail: true });
+  }
+  const passwordRegex = /[\w!@#$%^&*_\-\+\=]{8,50}/;
+  if (password.length < 8 || password.length > 50
+    || !passwordRegex.test(password)) {
+    return res.render('registration', { passwordCheckFail: true });
+  }
+  if (password !== passwordRepeat) {
+    return res.render('registration', { doublePasswordCheckFail: true });
+  }
 
   const user = await db.User.findOne({
-    where: { email },
+    where: { email: email.toLowerCase() },
   });
   if (user) {
-    // если нашли пользователя, отправляем статус ошибки
-    res.status(409).send(); // 409 CONFLICT
+    res.render('registration', { emailIsUsed: true });
   } else {
-    // иначе создаем нового пользователя и отправляем статус успеха
-    await db.User.create({ name, email, password });
-    res.status(201).send(); // 201 CREATED
+    await db.User.create({ name, email: email.toLowerCase(), password });
+    res.render('registration', { registrationSuccess: true });
   }
 });
 
