@@ -4,8 +4,7 @@ const db = require('../db/models/index');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  // страница с формой регистрации
-  res.send('Registration page');
+  res.render('registration');
 });
 
 router.post('/', async (req, res) => {

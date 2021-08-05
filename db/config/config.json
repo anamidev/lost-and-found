@@ -1,23 +1,23 @@
 {
   "development": {
-    "username": "artem",
-    "password": null,
-    "database": "itemlost",
+    "username": "lost_and_found_user",
+    "password": "lost_and_found_user",
+    "database": "lost_and_found",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
+    "username": "lost_and_found_user",
+    "password": "lost_and_found_user",
+    "database": "lost_and_found",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "postgres"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
+    "username": "lost_and_found_user",
+    "password": "lost_and_found_user",
+    "database": "lost_and_found",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "postgres"
   }
 }
