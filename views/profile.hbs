@@ -1,22 +1,17 @@
-<h3>Здесь отобразятся все посты юзера</h3>
-
-
-
-
-
-
+<h2>Ваши посты</h2>
 <div class="post">
 {{#each everyPost}}
 <div class="card" style="width: 25rem;">
-  <img src="{{this.photo}}" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">{{this.title}}</h5>
-    <p class="card-text">{{this.description}}
-    </p>
-    <a href="/profile/{{this.id}}/delete" class="btn btn-primary">Удалить пост</a>
-    
-  </div>
+  <a href="/post/{{this.id}}">
+    {{#if this.photo}}
+    <img src="{{this.photo}}" class="card-img-top" alt="photo">
+    {{/if}}
+    <div class="card-body">
+      <h5 class="card-title">{{this.title}}</h5>
+      <p class="card-text">{{this.description}}</p>
+      <a href="/post/{{this.id}}/delete" class="btn btn-primary">Удалить пост</a>
+    </div>
+  </a>
 </div>
 {{/each}}
-
 </div>

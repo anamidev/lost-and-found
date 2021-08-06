@@ -9,6 +9,9 @@ body {
 a{
   text-decoration:none
 }
+h2{
+  text-align: center;
+}
 .post{
   display: flex;
   height: 100vh;

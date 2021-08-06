@@ -13,9 +13,8 @@ router.get('/:id', sessionChecker, async (req, res) => {
     // рендерим страницу нужного пользователя
     res.render('profile', { everyPost });
   } else {
-    res.send('404');
+    res.redirect('/');
   }
 });
-
 
 module.exports = router;

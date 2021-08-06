@@ -1,24 +1,24 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">HOME</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+            data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
-{{#if userName}}
+        {{#if userName}}
         <div class="dropdown">
           <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
-            aria-expanded="false">
+             aria-expanded="false">
             Меню
           </a>
-
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
               <li><a class="dropdown-item" href="/post/new">Добавить пост</a></li>
               <li><a class="dropdown-item" href="/profile/{{userId}}">Мои посты</a></li>
-              <li><a class="dropdown-item" href="/claims/{{userId}}">Мои заявления</a></li>
+              <li><a class="dropdown-item" href="/claims/{{userId}}">Мои отклики</a></li>
               <li><a class="dropdown-item" href="/logout">Выйти</a></li>
             </ul>
         </div>
@@ -32,9 +32,9 @@
           </div>
 {{/if}}
     
-    <div class="dropdown">
+        <div class="dropdown">
           <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
-            aria-expanded="false">
+              aria-expanded="false">
             Категории
           </a>
 
@@ -44,7 +44,6 @@
               <li><a class="dropdown-item" href="/category/3">Документы</a></li>
               <li><a class="dropdown-item" href="/category/4">Животные</a></li>
               <li><a class="dropdown-item" href="/category/5">Другое</a></li>
-            
           </ul>
         </div>
       </ul>

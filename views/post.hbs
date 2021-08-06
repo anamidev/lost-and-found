@@ -1,37 +1,42 @@
-<div class="post" id="{{post.id}}">
-  <div>Кто нашел - {{post.User.name}}</div>
-  <img src=".{{post.photo}}" alt="без картинки">
-  <div>{{post.title}}</div>
-  <div>{{post.description}}</div>
-  {{#if userName}}
 
-    <form name="claimForm" action="/post/{{post.id}}" method="POST">
+<div class="post" id="{{post.id}}">
+  <div class="card" style="width: 25rem;">
+    <a href="{{post.photo}}" target="_blank"><img src=".{{post.photo}}" class="card-img-top" alt="..."></a>
+    <div class="card-body">
+      <h5 class="card-title">{{post.title}}</h5>
+      <p class="card-text">{{post.description}}</p>
+    </div>
+  </div>
+  {{#if userName}}
+  <div class="card text-center">
+   <form name="claimForm" action="/post/{{post.id}}" method="POST">
       {{#if alreadyClaimed}}
-      <input disabled type="text" name="text" placeholder="Ваше сообщение к заявлению">
-      <button disabled>CLAIM</button>
+      <input style="width: 500px;" disabled class="card-text" type="text" name="text" placeholder="Ваше сообщение к заявлению">
+      <button disabled class="btn btn-danger">Откликнуться</button>
       {{else}}
-      <input type="text" name="text" placeholder="Ваше сообщение к заявлению">
-      <button>CLAIM</button>
+      <input class="card-text" type="text" name="text" placeholder="Ваше сообщение к заявлению">
+      <button class="btn btn-primary">Откликнуться</button>
       {{/if}}
     </form>
-
-
+  </div>
+{{/if}}
+{{#if alreadyClaimed}}
+  Вы уже сделали запрос на этом посту!
   {{/if}}
-
-  {{#if alreadyClaimed}}
-  вы уже сделали запрос на этом посту!
-  {{/if}}
-
   {{#if claimFail}}
-  не удалось сделать запрос
+  Не удалось сделать запрос!
   {{/if}}
-
-  <div class="claim-messages">
+<div class="claim-messages card" >
     {{#each claimMess}}
-    <div>Ответил(а) - {{this.Message.User.name}}</div>
+    <div class="card-body">
+    <blockquote class="blockquote mb-0">
     <div>{{this.Message.text}}</div>
+    <footer class="blockquote-footer mt-0">{{this.Message.User.name}} откликнулся(-ась)</footer>
+    </blockquote>
+    </div>
     {{/each}}
   </div>
-
 </div>
+  
+  
 

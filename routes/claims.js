@@ -20,9 +20,12 @@ router.get('/:id', sessionChecker, async (req, res) => {
         { model: db.Message },
       ],
     });
-    res.render('claims', { userClaims });
+    console.log(userClaims);
+    const filtered = userClaims.filter((object) => object.Post.userId !== object.Message.userId);
+    console.log(filtered);
+    res.render('claims', { userClaims: filtered });
   } else {
-    res.send('404');
+    res.redirect('/');
   }
 });
 
