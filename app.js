@@ -1,4 +1,5 @@
 // основные пакеты для работы приложения
+require('dotenv').config();
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const hbs = require('hbs');
@@ -28,7 +29,6 @@ const { layoutChanger } = require('./middleware/commonMiddleware');
 
 // объявление приложения и указание порта
 const app = express();
-const PORT = 3001;
 
 const storageConfig = multer.diskStorage({ // мултер
   destination: (req, file, cb) => {
@@ -75,6 +75,6 @@ app.use('/post', postRouter);
 app.use('/claims', claimsRouter);
 app.use('/category', categoryRouter);
 
-app.listen(PORT, () => {
+app.listen(3000, () => {
   console.log('Server is up!');
 });

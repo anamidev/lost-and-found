@@ -21,8 +21,8 @@ router.get('/:id', sessionChecker, async (req, res) => {
       ],
     });
     console.log(userClaims);
-    const filtered = userClaims.filter((object) => object.messageId !== object.Message.id);
-    console.log(userClaims);
+    const filtered = userClaims.filter((object) => object.Post.userId !== object.Message.userId);
+    console.log(filtered);
     res.render('claims', { userClaims: filtered });
   } else {
     res.redirect('/');

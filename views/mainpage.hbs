@@ -1,16 +1,16 @@
-<h3>Главная страница и все посты через each</h3>
+<h2>Все посты</h2>
 <div class="post">
 {{#each everyPost}}
-<div class="card" style="width: 25rem;">
-  <a href="/post/{{this.id}}">
-    {{#if this.photo}}
-    <img src="{{this.photo}}" class="card-img-top" alt="photo">
-    {{/if}}
+<a href="/post/{{this.id}}">
+  <div class="card" style="width: 25rem;">
+    <img src="{{this.photo}}" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">{{this.title}}</h5>
-      <p class="card-text">{{this.description}}</p>
+      <p class="card-text">{{this.description}}
+      </p>
     </div>
-  </a>
-</div>
+  </div>
+</a>
 {{/each}}
 </div>
+

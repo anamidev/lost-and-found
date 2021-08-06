@@ -1,14 +1,5 @@
-{{!-- <div id="container">
-  {{#each categoryPosts}}
-  <div id="{{this.id}}">
-    <hr>
-    <img src=".{{this.photo}}" alt="Без изображения">
-    <a href="/post/{{this.id}}"><p>{{this.title}}</p></a>
-    <p>{{this.description}}</p>
-  </div>
-  {{/each}}
-</div> --}}
 
+<h2>Категория:{{currentCategory}}</h2>
 <div class="post">
 {{#each categoryPosts}}
 <div class="card" style="width: 25rem;">

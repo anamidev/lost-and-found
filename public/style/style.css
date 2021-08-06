@@ -6,7 +6,12 @@ body {
   align-items: center;
   height: 100vh; */
 }
-
+a{
+  text-decoration:none
+}
+h2{
+  text-align: center;
+}
 .post{
   display: flex;
   height: 100vh;
@@ -18,7 +23,14 @@ body {
 .card{
   margin: 10px;
 }
+.dropdown{
+ margin: 5px; 
+}
 
+.nav-item{
+  display: flex;
+}
 
-
-
+.nav-item{
+margin-top: 8px;
+}
