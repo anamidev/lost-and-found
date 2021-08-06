@@ -5,6 +5,7 @@
   {{/if}}
   <div>{{post.title}}</div>
   <div>{{post.description}}</div>
+  
   {{#if userName}}
 
     <form name="claimForm" action="/post/{{post.id}}" method="POST">
@@ -36,15 +37,3 @@
   </div>
 
 </div>
-
-{{!-- {{#each everyPost}}
-<div class="card" style="width: 25rem;">
-  <img src="{{this.photo}}" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">{{this.title}}</h5>
-    <p class="card-text">{{this.description}}
-    </p>
-    <a href="#" class="btn btn-primary">Clain</a>
-  </div>
-</div>
-{{/each}} --}}
