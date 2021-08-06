@@ -5,6 +5,7 @@ const hbs = require('hbs');
 const multer = require('multer'); // мултер
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
+// const layoutChanger = require("./middleware/commonMiddleware");
 
 // логгер для чтения команд на сервере и путь
 const morganLogger = require('morgan');
@@ -24,6 +25,7 @@ const claimsRouter = require('./routes/claims');
 const categoryRouter = require('./routes/category');
 
 const { layoutChanger } = require('./middleware/commonMiddleware');
+
 // объявление приложения и указание порта
 const app = express();
 const PORT = 3001;

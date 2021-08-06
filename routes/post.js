@@ -22,14 +22,27 @@ router.post('/new', async (req, res) => {
   if (title === '' || title == null) {
     return res.render('postnew', { titleCheckFail: true });
   }
-  await db.Post.create({
+  const newUserPost = await db.Post.create({
     title,
     description,
     categoryId: Number(category),
     userId: req.session.userId,
     photo,
   });
-  res.redirect('/post/new');
+
+  const newUserMessage = await db.Message.create({
+    userId: req.session.userId,
+    text: 'Я нашел это!',
+    postId: newUserPost.id,
+  });
+
+  await db.Claim.create({
+    postId: newUserPost.id,
+    messageId: newUserMessage.id,
+    userId: req.session.userId,
+  });
+
+  res.redirect(`/post/${newUserPost.id}`);
 });
 
 router.get('/:id', async (req, res) => {
