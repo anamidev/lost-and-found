@@ -62,8 +62,6 @@ router.get('/:id', async (req, res) => {
   // проверка наличия сессии, через middleware
   // если сессия есть, то отображать кнопку claim
   // проверка, если текущий пользователь сделал claim на посту или нет
-  // res.render('post', { post });
-  // }
 });
 
 // ручка для клейма в посте
@@ -110,6 +108,17 @@ router.post('/:id', async (req, res) => {
     // res.render('post', { post, alreadyClaimed: true, claimMess });
     res.redirect(`/post/${postId}`);
   } else res.render('post', { post, claimFail: true, claimMess });
+});
+
+router.get('/:id/delete', sessionChecker, async (req, res) => {
+  const { id } = req.params;
+  const currPost = await db.Post.findOne({ where: { id } });
+  if (req.session.userId === currPost.userId) {
+    await db.Post.destroy({ where: { id } });
+    res.redirect(`/profile/${req.session.userId}`);
+  } else {
+    res.redirect('/');
+  }
 });
 
 module.exports = router;

@@ -17,11 +17,16 @@ router.get('/:id', sessionChecker, async (req, res) => {
   }
 });
 
-router.get('/:id/delete', async (req, res) => {
-  const { id } = req.params;
-  // console.log(id);
-  await Post.destroy({ where: { id } });
-  res.redirect(`/profile/${req.session.userId}`);
-});
+// router.get('/:id/delete', sessionChecker, async (req, res) => {
+//   const { id } = req.params;
+//   const currPost = await Post.findOne({ where: { id } });
+//   console.log(currPost.userId);
+//   if (req.session.userId === currPost.userId) {
+//     await Post.destroy({ where: { id } });
+//     res.redirect(`/profile/${req.session.userId}`);
+//   } else {
+//     res.redirect('/');
+//   }
+// });
 
 module.exports = router;
