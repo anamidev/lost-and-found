@@ -1,11 +1,27 @@
 
-//сраница конкретног поста 
+<h1>Страница конкретного поста</h1>
 
-<div>
-  <div>{{post.title}}</div>
-  <div>{{post.text}}</div>
-  <div>{{post.owner}}</div>
-  {{#each claimer}}
-  <div>{{this.name}}</div>
+{{!-- <div id="container">
+  {{#each everyPost}}
+  <div>
+    <hr>
+    <p>{{this.id}}</p>
+    <p>{{this.photo}}</p>//ссылка
+    <p>{{this.title}}</p>
+    <p>{{this.description}}</p>
+
+  </div>
   {{/each}}
+</div> --}}
+
+{{#each everyPost}}
+<div class="card" style="width: 25rem;">
+  <img src="{{this.photo}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{this.title}}</h5>
+    <p class="card-text">{{this.description}}
+    </p>
+    <a href="#" class="btn btn-primary">Clain</a>
+  </div>
 </div>
+{{/each}}

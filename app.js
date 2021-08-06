@@ -5,13 +5,14 @@ const hbs = require('hbs');
 const multer = require('multer'); // мултер
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
+//const layoutChanger = require("./middleware/commonMiddleware")
 
 // логгер для чтения команд на сервере и путь
 const morganLogger = require('morgan');
 const path = require('path');
 
 // импорт мидлверов
-// const loginChecker = require('./middleware/loginChecker');
+//const loginChecker = require('./middleware/loginChecker');
 
 // импорт роутеров
 const mainPageRouter = require('./routes/mainpage');
@@ -22,6 +23,7 @@ const profileRouter = require('./routes/profile');
 const postRouter = require('./routes/post');
 
 const { layoutChanger } = require('./middleware/commonMiddleware');
+
 // объявление приложения и указание порта
 const app = express();
 const PORT = 3001;

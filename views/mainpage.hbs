@@ -1,5 +1,5 @@
 <h3>Главная страница и все посты через each</h3>
-<div id="container">
+{{!-- <div id="container">
   {{#each everyPost}}
   <div>
     <hr>
@@ -10,5 +10,19 @@
     
   </div>
   {{/each}}
+</div> --}}
+<div class="post">
+{{#each everyPost}}
+<div class="card" style="width: 25rem;">
+  <img src="{{this.photo}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{this.title}}</h5>
+    <p class="card-text">{{this.description}}
+    </p>
+      {{#if userName}}
+      <a href="#" class="btn btn-primary">Перейти на пост</a>
+     {{/if}}
+  </div>
 </div>
-
+{{/each}}
+</div>
