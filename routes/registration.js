@@ -4,10 +4,12 @@ const db = require('../db/models/index');
 const router = express.Router();
 
 router.get('/', (req, res) => {
+  // страница регистрации
   res.render('registration');
 });
 
 router.post('/', async (req, res) => {
+  // ручка регистрации с проверками имени, емайла, пароля
   const {
     name, email, password, passwordRepeat,
   } = req.body;
@@ -16,7 +18,7 @@ router.post('/', async (req, res) => {
     return res.render('registration', { nameCheckFail: true });
   }
 
-  const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/i;
+  const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/i;
   if (email.length > 255 || !emailRegex.test(email)) {
     return res.render('registration', { emailCheckFail: true });
   }

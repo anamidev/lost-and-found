@@ -1,27 +1,37 @@
+<div class="post" id="{{post.id}}">
+  <div>Кто нашел - {{post.User.name}}</div>
+  <img src=".{{post.photo}}" alt="без картинки">
+  <div>{{post.title}}</div>
+  <div>{{post.description}}</div>
+  {{#if userName}}
 
-<h1>Страница конкретного поста</h1>
+    <form name="claimForm" action="/post/{{post.id}}" method="POST">
+      {{#if alreadyClaimed}}
+      <input disabled type="text" name="text" placeholder="Ваше сообщение к заявлению">
+      <button disabled>CLAIM</button>
+      {{else}}
+      <input type="text" name="text" placeholder="Ваше сообщение к заявлению">
+      <button>CLAIM</button>
+      {{/if}}
+    </form>
 
-{{!-- <div id="container">
-  {{#each everyPost}}
-  <div>
-    <hr>
-    <p>{{this.id}}</p>
-    <p>{{this.photo}}</p>//ссылка
-    <p>{{this.title}}</p>
-    <p>{{this.description}}</p>
 
+  {{/if}}
+
+  {{#if alreadyClaimed}}
+  вы уже сделали запрос на этом посту!
+  {{/if}}
+
+  {{#if claimFail}}
+  не удалось сделать запрос
+  {{/if}}
+
+  <div class="claim-messages">
+    {{#each claimMess}}
+    <div>Ответил(а) - {{this.Message.User.name}}</div>
+    <div>{{this.Message.text}}</div>
+    {{/each}}
   </div>
-  {{/each}}
-</div> --}}
 
-{{#each everyPost}}
-<div class="card" style="width: 25rem;">
-  <img src="{{this.photo}}" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">{{this.title}}</h5>
-    <p class="card-text">{{this.description}}
-    </p>
-    <a href="#" class="btn btn-primary">Clain</a>
-  </div>
 </div>
-{{/each}}
+

@@ -1,5 +1,5 @@
 const express = require('express');
-const { Post } = require('../db/models');
+const db = require('../db/models/index');
 const { sessionChecker } = require('../middleware/commonMiddleware');
 
 const router = express.Router();
@@ -9,13 +9,21 @@ router.get('/:id', sessionChecker, async (req, res) => {
   // сделать проверку через req.session
   const { id } = req.params;
   if (req.session.userId === Number(id)) {
-    const everyPost = await Post.findAll({ where: { userId: req.session.userId } });
-    // рендерим страницу нужного пользователя
-    res.render('profile', { everyPost });
+    const userClaims = await db.Claim.findAll({
+      raw: true,
+      nest: true,
+      where: {
+        userId: id,
+      },
+      include: [
+        { model: db.Post },
+        { model: db.Message },
+      ],
+    });
+    res.render('claims', { userClaims });
   } else {
     res.send('404');
   }
 });
-
 
 module.exports = router;

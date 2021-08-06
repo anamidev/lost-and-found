@@ -1,0 +1,33 @@
+
+
+<h1>здесь отобразится все заклеймленые посты</h1>
+
+
+
+
+{{!-- <div class="post">
+  
+  {{#each userClaims}}
+  <div>
+    <a href="/post/{{this.Post.id}}">{{this.Post.title}}</a>
+    <div>{{this.Message.text}}</div>
+  </div>
+  {{/each}}
+</div> --}}
+
+
+
+<div class="post">
+  {{#each userClaims}}
+  <div class="card" style="width: 25rem;">
+    <img src="{{this.Post.photo}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{this.Post.title}}</h5>
+      <p class="card-text">{{this.Post.description}}
+       <p>{{this.Message.text}}</p> 
+      </p>
+    </div>
+  </div>
+  {{/each}}
+
+</div>

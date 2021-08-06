@@ -1,18 +1,6 @@
 <h3>Здесь отобразятся все посты юзера</h3>
 
-{{!-- <div id="container">
-  {{#each everyPost}}
-  <div>
-    <hr>
-    <p>{{this.id}}</p>
-    <p>{{this.title}}</p>
-    <p>{{this.description}}</p>
-    <img src="{{this.photo}}" alt="">
-    <a href="/profile/{{this.id}}/delete"> <button>удалить пост</button></a>
-    
-  </div>
-  {{/each}}
-</div> --}}
+
 
 
 
@@ -26,7 +14,7 @@
     <p class="card-text">{{this.description}}
     </p>
     <a href="/profile/{{this.id}}/delete" class="btn btn-primary">Удалить пост</a>
-    <a href="/profile/{{this.id}}/update" class="btn btn-primary">Редактировать пост</a>
+    
   </div>
 </div>
 {{/each}}

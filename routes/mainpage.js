@@ -5,11 +5,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   // главная страница, на которой идет отрисовка всех постов из базы данных
-  // const allPosts = db.Post.findAll({
-  // include: db.User
-  // })
   const everyPost = await Post.findAll();
-  console.log(res.locals.userId, res.locals.userName);
   res.render('mainpage', { everyPost });
 });
 

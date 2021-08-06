@@ -21,6 +21,8 @@ const loginRouter = require('./routes/login');
 const logoutRouter = require('./routes/logout');
 const profileRouter = require('./routes/profile');
 const postRouter = require('./routes/post');
+const claimsRouter = require('./routes/claims');
+const categoryRouter = require('./routes/category');
 
 const { layoutChanger } = require('./middleware/commonMiddleware');
 
@@ -57,7 +59,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   name: 'session',
-  cookie: { secure: false, httpOnly: false },
+  cookie: { secure: false, httpOnly: true },
   store: new FileStore({}),
 }));
 
@@ -70,6 +72,8 @@ app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
 app.use('/profile', profileRouter);
 app.use('/post', postRouter);
+app.use('/claims', claimsRouter);
+app.use('/category', categoryRouter);
 
 app.listen(PORT, () => {
   console.log('Server is up!');

@@ -36,42 +36,89 @@ router.get('/:id', async (req, res) => {
   // отрисовка страницы поста с информацией о создателе и пользователях,
   // которые сделали claim
   const { id } = req.params;
-  // const post = await db.Post.findOne({
-    // where: { id },
-    // include db.User
-  // });
+  const post = await db.Post.findOne({
+    raw: true,
+    nest: true,
+    where: { id },
+    include: db.User,
+  });
+  const claimMess = await db.Claim.findAll({
+    raw: true,
+    nest: true,
+    where: { postId: post.id },
+    include: {
+      model: db.Message,
+      include: {
+        model: db.User,
+        required: true,
+      },
+    },
+  });
+  if (req.session.userId) {
+    const userClaim = await db.Claim.findOne({ where: { userId: req.session.userId, postId: id }});
+    if (userClaim) res.render('post', { post, alreadyClaimed: true, claimMess });
+    else res.render('post', { post, claimMess });
+  } else res.render('post', { post, claimMess });
   // проверка наличия сессии, через middleware
   // если сессия есть, то отображать кнопку claim
   // проверка, если текущий пользователь сделал claim на посту или нет
-  // const postClaimers = await db.Claim.findAll({
-    // attributes: ['email'],
-    // where: { post_id: id },
-    // include db.User
-  // });
-  // if (postClaimers.includes(req.session.userEmail)) {
-    // вместо res.send отправить json
-    // res.send('отправляем объект для статуса кнопки, чтобы добавить ей класс для выключенной стилизации');
-  // } else {
-    // вместо res.send отправить json или статус ответа через res.status
-    // res.cookie = { postId: id };
-    res.render('post');
-  // }
 });
 
 // ручка для клейма в посте
-// router.post('/:id', async (req, res) => {
-//   const { id } = req.params;
-  // const claimedPost = await db.Claim.findOne({
-  //   where: { claimer_id: req.session.userId },
-  // });
-  // if (claimedPost) {
-    // вместо res.send отправить json или статус ответа через res.status
-    // res.send('this post has already been claimed');
-  // } else {
-    // await db.Claim.create({ post_id: id, claimer_id: req.session.userId });
-    // сделать запись, отправить статус успеха, возможно сделать редирект на страницу этого же поста
-//     res.send('post has been claimed');
-  // }
-// });
+router.post('/:id', async (req, res) => {
+  const { id: postId } = req.params;
+  const { text } = req.body;
+  const post = await db.Post.findOne({
+    raw: true,
+    nest: true,
+    where: { id: postId },
+    include: db.User,
+  });
+  const claimMess = await db.Claim.findAll({
+    raw: true,
+    nest: true,
+    where: { postId: post.id },
+    include: {
+      model: db.Message,
+      include: {
+        model: db.User,
+        required: true,
+      },
+    },
+  });
+  const userClaim = await db.Claim.findOne({ where: { userId: req.session.userId, postId }});
+  if (userClaim) return res.render('post', { post, alreadyClaimed: true, claimMess });
+  await db.Message.create({
+    userId: req.session.userId,
+    text,
+    postId,
+  });
+  const messId = await db.Message.findOne({
+    where: {
+      userId: req.session.userId,
+      postId,
+    },
+  });
+  if (messId) {
+    await db.Claim.create({
+      postId,
+      messageId: messId.id,
+      userId: req.session.userId,
+    });
+    // res.render('post', { post, alreadyClaimed: true, claimMess });
+    res.redirect(`/post/${postId}`);
+  } else res.render('post', { post, claimFail: true, claimMess });
+});
+
+router.get('/:id/delete', sessionChecker, async (req, res) => {
+  const { id } = req.params;
+  const currPost = await db.Post.findOne({ where: { id } });
+  if (req.session.userId === currPost.userId) {
+    await db.Post.destroy({ where: { id } });
+    res.redirect(`/profile/${req.session.userId}`);
+  } else {
+    res.redirect('/');
+  }
+});
 
 module.exports = router;
