@@ -1,0 +1,48 @@
+<div class="mb-3"></div>
+<div class="container">
+  <form action="/registration" method="POST">
+
+    <div class="mb-3">
+      <input type="text" name="name" placeholder="Ваше имя" class="form-control">
+    </div>
+    
+    <div class="mb-3">
+      <input type="email" name="email" placeholder="Email" class="form-control">
+    </div>
+
+    <div class="mb-3">
+      <input type="password" name="password" placeholder="Пароль" class="form-control">
+    </div>
+
+    <div class="mb-3">
+      <input type="password" name="passwordRepeat" placeholder="Повторите пароль" class="form-control">
+    </div>
+    
+    <div class="mb-3">
+    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+
+    {{#if registrationSuccess}}
+    <div>Регистрация прошла успешно!</div>
+    {{/if}}
+
+    {{#if nameCheckFail}}
+    <div>Некорректное имя</div>
+    {{/if}}
+
+    {{#if emailCheckFail}}
+    <div>Некорректный email</div>
+    {{/if}}
+
+    {{#if passwordCheckFail}}
+    <div>Пароль не соответствует формату: не менее 8 символов, не более 50 символов, может состоять из букв, цифр, спецсимволов</div>
+    {{/if}}
+
+    {{#if doublePasswordCheckFail}}
+    <div>Пароль не совпадает</div>
+    {{/if}}
+
+    {{#if emailIsUsed}}
+    <div>Такой email уже используется</div>
+    {{/if}}
+  </form>
+</div>

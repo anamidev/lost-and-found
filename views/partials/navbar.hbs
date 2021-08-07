@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">HOME</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+            data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        {{#if userName}}
+        <div class="dropdown">
+          <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+             aria-expanded="false">
+            Меню
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <li><a class="dropdown-item" href="/post/new">Добавить пост</a></li>
+              <li><a class="dropdown-item" href="/profile/{{userId}}">Мои посты</a></li>
+              <li><a class="dropdown-item" href="/claims/{{userId}}">Мои отклики</a></li>
+              <li><a class="dropdown-item" href="/logout">Выйти</a></li>
+            </ul>
+        </div>
+
+
+       
+{{else}} 
+           <div class="nav-item">
+            <a class="dropdown-item" href="/login">Войти</a>
+            <a class="dropdown-item" href="/registration">Регистрация</a>
+          </div>
+{{/if}}
+    
+        <div class="dropdown">
+          <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+              aria-expanded="false">
+            Категории
+          </a>
+
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <li><a class="dropdown-item" href="/category/1">Личные вещи</a></li>
+              <li><a class="dropdown-item" href="/category/2">Электроника</a></li>
+              <li><a class="dropdown-item" href="/category/3">Документы</a></li>
+              <li><a class="dropdown-item" href="/category/4">Животные</a></li>
+              <li><a class="dropdown-item" href="/category/5">Другое</a></li>
+          </ul>
+        </div>
+      </ul>
+    </div>
+  </div>
+          </li>
+  
+          <div class="navbar-brand">{{userName}}</div>
+</nav>

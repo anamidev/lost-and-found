@@ -1,0 +1,31 @@
+<div class="mb-3"></div>
+<div class="container">
+  <form  method="POST" action="/post/new"  enctype="multipart/form-data">
+    <div class="mb-3">
+      {{#if categoryCheckFail}}
+      <div>Вам нужно выбрать категорию предмета</div>
+      {{/if}}
+      <select name="category" class="form-select" aria-label="Default select example">
+        <option value="0"> Выберите категорию</option>
+        <option value="1">Личные вещи</option>
+        <option value="2">Электроника</option>
+        <option value="3">Документы</option>
+        <option value="4">Животные</option>
+        <option value="5">Другое</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      {{#if titleCheckFail}}
+      <div>Введите название предмета</div>
+      {{/if}}
+    <input type="text" name="title" placeholder="Название предмета" class="form-control" >
+      </div>
+      <div class="mb-3"><input type="text" name="description" placeholder="Описание предмета" class="form-control">
+      </div>
+    <div class="mb-3"><input type="file" name="photo" placeholder="Загрузить фотографию" class="form-control">
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Добавить новый пост</button>
+  </form>
+</div>

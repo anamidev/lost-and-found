@@ -1,0 +1,16 @@
+<h2>Все посты</h2>
+<div class="post">
+{{#each everyPost}}
+<a href="/post/{{this.id}}">
+  <div class="card" style="width: 25rem;">
+    <img src="{{this.photo}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{this.title}}</h5>
+      <p class="card-text">{{this.description}}
+      </p>
+    </div>
+  </div>
+</a>
+{{/each}}
+</div>
+
