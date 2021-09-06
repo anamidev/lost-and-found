@@ -3,7 +3,9 @@
 {{#each everyPost}}
 <a href="/post/{{this.id}}">
   <div class="card" style="width: 25rem;">
+    {{#if this.photo}}
     <img src="{{this.photo}}" class="card-img-top" alt="...">
+    {{/if}}
     <div class="card-body">
       <h5 class="card-title">{{this.title}}</h5>
       <p class="card-text">{{this.description}}

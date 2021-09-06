@@ -32,7 +32,7 @@ router.post('/new', async (req, res) => {
 
   const newUserMessage = await db.Message.create({
     userId: req.session.userId,
-    text: 'Я нашел это!',
+    text: 'Я нашел(-ла) это!',
     postId: newUserPost.id,
   });
 

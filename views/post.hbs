@@ -1,7 +1,9 @@
 
 <div class="post" id="{{post.id}}">
   <div class="card" style="width: 25rem;">
+    {{#if post.photo}}
     <a href="{{post.photo}}" target="_blank"><img src=".{{post.photo}}" class="card-img-top" alt="..."></a>
+    {{/if}}
     <div class="card-body">
       <h5 class="card-title">{{post.title}}</h5>
       <p class="card-text">{{post.description}}</p>
